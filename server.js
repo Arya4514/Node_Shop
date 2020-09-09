@@ -10,15 +10,20 @@ var authController = require('./controller/auth.controller.js')
 //initial the user roles
 
 function initial() {
-  {Role.create({
-    id: 1,
-    name: "admin"
-  });
+  var admin = await Role.findOne({ where: { name: 'admin' } });
+  if (!admin) {
+    Role.create({
+      id: 1,
+      name: "admin"
+    });
+  }
 
-  Role.create({
-    id: 2,
-    name: "user"
-  });}
+  var user = await Role.findOne({ where: { name: 'user' } });
+  if (!user) {
+    Role.create({
+      id: 2,
+      name: "user"
+    });
 }
 
 
