@@ -14,12 +14,9 @@ exports.signup = (req, res) => {
   try {
     // Save User to Database
     User.create({
-      name: req.body.name,
-      email: req.body.email,
-      mo_no: req.body.mo_no,
-      city: req.body.city,
-      password: bcrypt.hashSync(req.body.password, 8),
-      user_type: "admin"
+      username: req.body.username,
+    email: req.body.email,
+    password: bcrypt.hashSync(req.body.password, 8)
     })
       .then(user => {
         if (req.body.roles) {
@@ -84,7 +81,7 @@ exports.signin = (req, res) => {
         }
         res.status(200).send({
           id: user.id,
-          name: user.name,
+          username: user.name,
           email: user.email,
           roles: authorities,
           accessToken: token
